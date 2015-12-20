@@ -1,0 +1,6 @@
+bin/
+intermediate/
+.vs
+*.opensdf
+*.sdf
+*.v14.suo
