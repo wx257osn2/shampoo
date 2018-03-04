@@ -103,7 +103,7 @@ unorm_4 operator()(const float_2& coord)const restrict(amp){
 	const auto campos = vec3(0.f, 0.f, 0.f);
 	const float_2 pos = (coord.xy * 2.f - resolution) / min(resolution.x, resolution.y);
 	const auto raydir = vec3(1.f, pos.y, pos.x);
-	return vec4<unorm>(shoot(campos, raydir));
+	return unorm4(shoot(campos, raydir));
 }
 
 };
@@ -111,8 +111,8 @@ unorm_4 operator()(const float_2& coord)const restrict(amp){
 namespace config{
 
 static constexpr float time_per_frame = 0.02f;
-static constexpr unsigned int width = 1280u;
-static constexpr unsigned int height = 720u;
+static constexpr int width = 1280;
+static constexpr int height = 720;
 static constexpr bool prerender = false;
 using shader = sunset_ray_marching;
 

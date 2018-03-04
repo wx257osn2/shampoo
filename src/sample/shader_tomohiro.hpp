@@ -58,9 +58,9 @@ unorm_4 operator()(const float_2& coord)const restrict(amp){
 		pos_on_ray = cam.pos + t * raydir;
 	}
 	if(abs(d) < .001f)
-		return vec4<unorm>(get_normal(pos_on_ray), 1.f);
+		return unorm4(get_normal(pos_on_ray), 1.f);
 	else
-		return vec4<unorm>(0.f);
+		return unorm4(0.f);
 }
 
 };
@@ -68,8 +68,8 @@ unorm_4 operator()(const float_2& coord)const restrict(amp){
 namespace config{
 
 static constexpr float time_per_frame = 0.f;
-static constexpr unsigned int width = 512u;
-static constexpr unsigned int height = width;
+static constexpr int width = 512;
+static constexpr int height = width;
 static constexpr bool prerender = true;
 using shader = sample_ray_marching;
 

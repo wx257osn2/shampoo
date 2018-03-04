@@ -127,7 +127,7 @@ unorm_4 operator()(const float_2& coord)const restrict(amp){
 	glow *= min(1.f, 4.f - (4.f / float(max_march - 1)) * float(march));
 	const float scanline = 1.f - .3f * (mod(coord.y, 4.f) < 2.f);
 	const auto t = .15f + glow * .75f;
-	return vec4<unorm>(vec3(t, t, .2f + glow) * fog + fog2, 1.f) * scanline;
+	return unorm4(vec3(t, t, .2f + glow) * fog + fog2, 1.f) * scanline;
 }
 
 };
@@ -135,8 +135,8 @@ unorm_4 operator()(const float_2& coord)const restrict(amp){
 namespace config{
 
 static constexpr float time_per_frame = 0.1f;
-static constexpr unsigned int width = 1920u;
-static constexpr unsigned int height = 1080u;
+static constexpr int width = 1920;
+static constexpr int height = 1080;
 static constexpr bool prerender = false;
 using shader = i_saint_ray_marching;
 

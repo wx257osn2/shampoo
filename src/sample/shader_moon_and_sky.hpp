@@ -147,7 +147,7 @@ unorm_4 operator()(const float_2& coord)const restrict(amp){
 		col += shoot(cam_pos, raydir + vec3(0.f, (mod(i, 3.f) - 1.f) * .5f / resolution.x, ((i / 3.f) - 1.f) * .5f / resolution.x));
 	col/=9.f;
 	float_4 moon = vec4(moonF(pos - vec2(0.f, .5f)), 1.f);
-	return vec4<unorm>((col + moon).rgb, 1.f);
+	return unorm4((col + moon).rgb, 1.f);
 }
 
 };
@@ -155,8 +155,8 @@ unorm_4 operator()(const float_2& coord)const restrict(amp){
 namespace config{
 
 static constexpr float time_per_frame = 0.01f;
-static constexpr unsigned int width = 1280u;
-static constexpr unsigned int height = 720u;
+static constexpr int width = 1280;
+static constexpr int height = 720;
 static constexpr bool prerender = true;
 using shader = moon_and_sky_ray_marching;
 

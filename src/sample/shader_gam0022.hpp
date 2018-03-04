@@ -17,8 +17,7 @@ float_2 resolution;
 float time;
 const float EPS = 0.01f;
 const float OFFSET = EPS * 100.f;
-// normalize(vec3(-3, 5, -2))
-const float_3 lightdir = vec3(-.48666426339228763f, .8111071056538127f, -.3244428422615251f);
+const float_3 lightdir = normalize(vec3(-3, 5, -2));
 
 // distance functions
 float_3 on_rep(const float_3& p, float interval)const restrict(amp){
@@ -148,7 +147,7 @@ unorm_4 operator()(const float_2& coord)const restrict(amp){
 		if (!res.hit)
 			break;
 	}
-	return vec4<unorm>(color, 1.f);
+	return unorm4(color, 1.f);
 }
 
 };
@@ -156,8 +155,8 @@ unorm_4 operator()(const float_2& coord)const restrict(amp){
 namespace config{
 
 static constexpr float time_per_frame = 0.02f;
-static constexpr unsigned int width = 512u;
-static constexpr unsigned int height = width;
+static constexpr int width = 512;
+static constexpr int height = width;
 static constexpr bool prerender = false;
 using shader = reflect_ray_marching;
 
