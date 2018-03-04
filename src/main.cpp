@@ -1,4 +1,7 @@
+#pragma warning(push)
+#pragma warning(disable:5040)
 #include<will/graphics.hpp>
+#pragma warning(pop)
 #include<will/window.hpp>
 #include<will/key.hpp>
 #include<will/layered_window.hpp>
