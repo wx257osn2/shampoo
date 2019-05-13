@@ -21,7 +21,7 @@ struct amp_shader_base{
 		const T shader(input);
 		auto texture = input.texture;
 		const auto resolution = input.resolution;
-		parallel_for_each(accv, texture.extent, [=](index<2> idx)restrict(amp){const auto coord = get_coord(idx, resolution); texture.set(idx, shader(coord).bgra);});
+		parallel_for_each(accv, texture.extent, [=](index<2> idx)restrict(amp){const auto coord = get_coord(idx, resolution); texture.set(idx, shader(coord));});
 	}
 };
 }
@@ -34,7 +34,7 @@ inline will::d2d::bitmap shader(RenderTarget&& rt, will::amp::graphics::texture_
 	namespace ampg = will::amp::graphics;
 
 	amp_shader::config::shader::apply_shader({tex_view, {static_cast<float>(width), static_cast<float>(height)}, t}, rt.get_accelerator_view());
-	return +rt.reinterpret_convert<will::d2d::bitmap>(tex_view, will::d2d::bitmap::property{}.format(DXGI_FORMAT_B8G8R8A8_UNORM).alpha_mode(D2D1_ALPHA_MODE_PREMULTIPLIED));
+	return +rt.pixel_format_convert<will::d2d::bitmap>(tex_view, will::d2d::bitmap::property{}.format(DXGI_FORMAT_B8G8R8A8_UNORM).alpha_mode(D2D1_ALPHA_MODE_PREMULTIPLIED));
 }
 
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR pCmdLine, int showCmd)try{
